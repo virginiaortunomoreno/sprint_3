@@ -84,23 +84,38 @@ function addToCartList(id) {
             cartList.push(product);
         }
     }
-    alert("Se ha añadido el producto a tu cesta de compra");
 }
 
 // Exercise 2
 function cleanCart() {
-
+    while(cartList.length > 0)
+        cartList.pop();
 }
 
 // Exercise 3
 function calculateSubtotals() {
     // 1. Create a for loop on the "cartList" array 
     // 2. Implement inside the loop an if...else or switch...case to add the quantities of each type of product, obtaining the subtotals: subtotalGrocery, subtotalBeauty and subtotalClothes
+    for(let i=0; i<cartList.length; i++) {
+        let product = cartList[i];
+        switch(product.type){
+            case(grocery):
+                subtotal.grocery += product.price;
+                break;
+            case(beauty):
+                subtotal.beauty += product.beauty;
+                break;
+            case(clothes):
+                subtotal.clothes += product.clothes;
+                break;
+        }
+    }
 }
 
 // Exercise 4
 function calculateTotal() {
     // Calculate total price of the cart either using the "cartList" array
+
 }
 
 // Exercise 5
