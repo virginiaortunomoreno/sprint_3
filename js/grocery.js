@@ -96,16 +96,19 @@ function cleanCart() {
 function calculateSubtotals() {
     // 1. Create a for loop on the "cartList" array 
     // 2. Implement inside the loop an if...else or switch...case to add the quantities of each type of product, obtaining the subtotals: subtotalGrocery, subtotalBeauty and subtotalClothes
+    subtotal.grocery.value = 0;
+    subtotal.beauty.value = 0;
+    subtotal.clothes.value = 0;
     for(let i=0; i<cartList.length; i++) {
         let product = cartList[i];
         switch(product.type){
-            case('grocery'):
+            case 'grocery':
                 subtotal.grocery.value += product.price;
                 break;
-            case('beauty'):
+            case 'beauty':
                 subtotal.beauty.value += product.price;
                 break;
-            case('clothes'):
+            case 'clothes':
                 subtotal.clothes.value += product.price;
                 break;
         }
@@ -121,23 +124,46 @@ function calculateTotal() {
     }
 }
 
-// Exercise 5
+// Exercise -
 function applyPromotionsSubtotals() {
 
 }
 
-// Exercise 6
+// Exercise 5
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+    cart = [];
+    for (let i=0; i<cartList.length; i++) {
+        let product = cartList[i];
+        if (cart.indexOf(product) === -1) {
+            product.quantity = 1;
+            cart.push(product);
+        } else {
+            product.quantity++;
+        }
+    }
+}
+
+// Exercise 6
+function applyPromotionsCart() {
+    // Apply promotions to each item in the array "cart"
+    let indexCookingOil = cart.findIndex(products => products.name === 'cooking oil');
+        if (indexCookingOil != -1) {
+            if (cart[indexCookingOil].quantity >=3) {
+                cart[indexCookingOil].subtotalWithDiscount = 10 * cart[indexCookingOil].quantity;
+            }
+        }
+       
+    let indexCupcakeMixture = cart.findIndex(products => products.name === 'Instant cupcake mixture');
+        if (indexCupcakeMixture != -1) {
+            if (cart[indexCupcakeMixture].quantity >= 10) {
+                cart[indexCupcakeMixture].subtotalWithDiscount = ((cart[indexCupcakeMixture].price * 2)/3) * cart[indexCupcakeMixture].quantity;
+            }
+        } 
 }
 
 // Exercise 7
-function applyPromotionsCart() {
-    // Apply promotions to each item in the array "cart"
-}
-
-// Exercise 8
 function addToCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
@@ -154,4 +180,9 @@ function removeFromCart(id) {
 // Exercise 10
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+}
+
+function comprar() {
+    generateCart();
+    applyPromotionsCart();
 }

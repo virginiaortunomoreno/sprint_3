@@ -3,6 +3,10 @@
 body {
     font-family: Poppins;
 }
-#errorPassword, #errorName, #errorPhone {
+#errorPassword, #errorFirstName, #errorPhone, #errorLastName, #errorAddress, #errorEmail {
     display: none;
+}
+
+#formulario p {
+    color: red;
 }
